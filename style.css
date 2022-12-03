@@ -1,0 +1,12 @@
+.grid-row{
+    line-height: 0px;
+}
+.grid-cell{
+    display: block;
+    display: inline-block;
+    border: 2px solid black;
+}
+.grid-cell-hovered{
+
+    background-color: yellow;
+}
