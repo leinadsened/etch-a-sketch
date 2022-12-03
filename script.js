@@ -1,6 +1,17 @@
 let container = document.getElementById("container");
-let gridSize = prompt("How big of a grid would you like good sire?", Number);
-
+let gridSize = 0;
+let check = checkNumber();
+while(check){
+    gridSize = prompt("How big of a grid would you like good sire?", "16");
+    check = checkNumber();
+}
+function checkNumber(){
+    if (parseInt(gridSize) > 1 && parseInt(gridSize) < 100){
+        return false;
+    } else {
+        return true;
+    }
+}
 for (i=1; i <= gridSize; i++){
     let gridRow = document.createElement("div");
     let gridHeight = 100/gridSize + "%";
