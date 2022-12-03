@@ -10,7 +10,8 @@ for (i=1; i <= gridSize; i++){
         let gridWidth = 100/gridSize + "%";
         gridCell.classList.add("grid-cell");
         gridCell.style.width = gridWidth;
-        gridCell.addEventListener("mouseover", () => gridCell.classList.add("grid-cell-hovered"));
+        gridCell.addEventListener("mouseover", () => {let randomColor = Math.floor(Math.random()*16777215).toString(16);
+        gridCell.style.background = "#" + randomColor;});
         gridRow.appendChild(gridCell);
     }
     gridRow.classList.add("grid-row");
