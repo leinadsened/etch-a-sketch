@@ -1,12 +1,21 @@
+#container{
+    width: 960px;
+    height: 960px;
+
+}
 .grid-row{
     line-height: 0px;
+
+    width: 100%;
+    display: flex;
 }
 .grid-cell{
     display: block;
+    height: 100%;
     display: inline-block;
-    border: 2px solid black;
+    border: 1px solid black;
 }
 .grid-cell-hovered{
 
-    background-color: yellow;
+    background-color: #fd8100;
 }
