@@ -1,9 +1,14 @@
-printGrid(16);
+printGrid(8);
+let goalColor = "red";
+let goalScore = 80;
 let display = document.getElementById("display");
 let check = document.createElement("button");
-check.addEventListener("click", getColors());
+check.addEventListener("click", getColors);
 check.textContent = "check the colors";
 display.appendChild(check);
+let scoreDisplay = document.createElement("div");
+scoreDisplay.classList.add("scoreDisplay");
+display.appendChild(scoreDisplay);
 
 function RGBToHSL(rgb) {
     r = rgb[0];
@@ -46,23 +51,73 @@ function RGBToHSL(rgb) {
 
 function getColors(){
     let cells = document.getElementsByClassName("gridcell");
-    let colorValues = [];
-    
+    let cellCount = 0;
     for(i = 0; i < cells.length; i++){
         let cellStyle = cells[i].style;
         let cellColor = cellStyle.backgroundColor;
         cellColor = cellColor.replace(/[^\d,]/g, '').split(',');
         cellColor = RGBToHSL(cellColor);
-        if (isNaN(cellColor)){
-            colorValues.push("");
-        } else {
-            colorValues.push(cellColor);
+        if (checkColor(cellColor)){
+            cellCount++
         }
+        }
+    let scorePercentage = (cellCount / cells.length)*100;
+    if (scorePercentage < goalScore){
+    scoreDisplay.textContent = "You are " + scorePercentage + "% done, keep going!";
+    } else {
+        scoreDisplay.textContent = "Congratulations, you have compelted this level!";
     }
+}
 
-
-    console.log(colorValues);
-
+function checkColor(colorToCheck){
+    if(isNaN(colorToCheck)){
+        return false;
+    } else{
+        switch(goalColor) {
+            case "red":
+                if (colorToCheck <= 15 || colorToCheck > 315){
+                    return true;
+                } else{
+                    return false;
+                }
+            case "orange":
+                if (colorToCheck >= 15 && colorToCheck < 45){
+                    return true;
+                } else{
+                    return false;
+                }
+            case "yellow":
+                if(colorToCheck >= 45 && colorToCheck < 75){
+                    return true;
+                } else{
+                    return false;
+                }
+            case "green":
+                if(colorToCheck >= 75 && colorToCheck < 150){
+                    return true;
+                } else{
+                    return false;
+                }
+            case "turquoise":
+                if(colorToCheck >= 150 && colorToCheck < 190){
+                    return true;
+                } else {
+                    return false;
+                }
+            case "blue":
+                if(colorToCheck >= 190 && colorToCheck < 260){
+                    return true;
+                } else {
+                    return false;
+                }
+            case "violet":
+                if(colorToCheck >= 260 && colorToCheck < 315){
+                    return true;
+                } else {
+                    return false;
+                }
+        }    
+    }
 }
 
 function printGrid(gridSize){
