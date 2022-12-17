@@ -1,5 +1,5 @@
-let goalColor = "green";
-let goalScore = 80;
+let goalColors = ["green","red","orange","yellow","turquoise","blue","violet"];
+
 let display = document.getElementById("display");
 let scoreDisplay = document.createElement("div");
 scoreDisplay.classList.add("scoreDisplay");
@@ -8,8 +8,9 @@ let goalColorDisplay = document.createElement("div");
 goalColorDisplay.classList.add("goalColorDisplay");
 goalColorDisplay.textContent = "This color is your goal!";
 display.appendChild(goalColorDisplay);
+printGrid(8,20);
 
-printGrid(8);
+
 
 function RGBToHSL(rgb) {
     r = rgb[0];
@@ -50,7 +51,7 @@ function RGBToHSL(rgb) {
     return h;
 }
 
-function getColors(){
+function checkColors(goalScore, goalColor){
     let cells = document.getElementsByClassName("gridcell");
     let cellCount = 0;
     for(i = 0; i < cells.length; i++){
@@ -58,19 +59,21 @@ function getColors(){
         let cellColor = cellStyle.backgroundColor;
         cellColor = cellColor.replace(/[^\d,]/g, '').split(',');
         cellColor = RGBToHSL(cellColor);
-        if (checkColor(cellColor)){
+        if (checkColor(cellColor, goalColor)){
             cellCount++
         }
         }
     let scorePercentage = (cellCount / cells.length)*100;
     if (scorePercentage < goalScore){
-    scoreDisplay.textContent = "You are " + scorePercentage + "% done, keep going!";
+        scoreDisplay.textContent = "You are " + scorePercentage + "% done, keep going!";
+        return true;
     } else {
+        return false;
         scoreDisplay.textContent = "Congratulations, you have compelted this level!";
     }
 }
 
-function checkColor(colorToCheck){
+function checkColor(colorToCheck, goalColor){
     if(isNaN(colorToCheck)){
         return false;
     } else{
@@ -83,12 +86,14 @@ function checkColor(colorToCheck){
                     return false;
                 }
             case "orange":
+                goalColorDisplay.style.backgroundColor = "hsl(30,100%,50%)";
                 if (colorToCheck >= 15 && colorToCheck < 45){
                     return true;
                 } else{
                     return false;
                 }
             case "yellow":
+                goalColorDisplay.style.backgroundColor = "hsl(60,100%,50%)";
                 if(colorToCheck >= 45 && colorToCheck < 75){
                     return true;
                 } else{
@@ -102,18 +107,21 @@ function checkColor(colorToCheck){
                     return false;
                 }
             case "turquoise":
+                goalColorDisplay.style.backgroundColor = "hsl(140,100%,50%)";
                 if(colorToCheck >= 150 && colorToCheck < 190){
                     return true;
                 } else {
                     return false;
                 }
             case "blue":
+                goalColorDisplay.style.backgroundColor = "hsl(225,100%,50%)";
                 if(colorToCheck >= 190 && colorToCheck < 260){
                     return true;
                 } else {
                     return false;
                 }
             case "violet":
+                goalColorDisplay.style.backgroundColor = "hsl(295,100%,50%)";
                 if(colorToCheck >= 260 && colorToCheck < 315){
                     return true;
                 } else {
@@ -123,8 +131,9 @@ function checkColor(colorToCheck){
     }
 }
 
-function printGrid(gridSize){
+function printGrid(gridSize, goalScore){
     let container = document.getElementById("container");
+    let goalColor = goalColors[Math.floor(Math.random()*goalColors.length)];
     for (i=1; i <= gridSize; i++){
         let gridRow = document.createElement("div");
         let gridHeight = 100/gridSize + "%";
@@ -136,7 +145,7 @@ function printGrid(gridSize){
             gridCell.style.width = gridWidth;
             gridCell.addEventListener("mouseover", () => {let randomColor = Math.floor(Math.random()*360);
             gridCell.style.background = "hsl(randomColor, 100%, 50%)".replace(/randomColor/, randomColor);});
-            gridCell.addEventListener("mouseout", getColors);
+            gridCell.addEventListener("mouseout", () => {checkColors(goalScore, goalColor)});
             gridRow.appendChild(gridCell);
         }
         gridRow.classList.add("grid-row");
