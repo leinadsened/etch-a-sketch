@@ -80,7 +80,7 @@ function checkColor(colorToCheck, goalColor){
         switch(goalColor) {
             case "red":
                 goalColorDisplay.style.backgroundColor = "hsl(0,100%,50%)";
-                if (colorToCheck <= 15 || colorToCheck > 315){
+                if (colorToCheck <= 20 || colorToCheck > 330){
                     return true;
                 } else{
                     return false;
@@ -94,35 +94,35 @@ function checkColor(colorToCheck, goalColor){
                 }
             case "yellow":
                 goalColorDisplay.style.backgroundColor = "hsl(60,100%,50%)";
-                if(colorToCheck >= 45 && colorToCheck < 75){
+                if(colorToCheck >= 45 && colorToCheck < 70){
                     return true;
                 } else{
                     return false;
                 }
             case "green":
                 goalColorDisplay.style.backgroundColor = "hsl(120,100%,50%)";
-                if(colorToCheck >= 75 && colorToCheck < 150){
+                if(colorToCheck >= 75 && colorToCheck < 140){
                     return true;
                 } else{
                     return false;
                 }
             case "turquoise":
-                goalColorDisplay.style.backgroundColor = "hsl(140,100%,50%)";
-                if(colorToCheck >= 150 && colorToCheck < 190){
+                goalColorDisplay.style.backgroundColor = "hsl(175,100%,50%)";
+                if(colorToCheck >= 140 && colorToCheck < 190){
                     return true;
                 } else {
                     return false;
                 }
             case "blue":
                 goalColorDisplay.style.backgroundColor = "hsl(225,100%,50%)";
-                if(colorToCheck >= 190 && colorToCheck < 260){
+                if(colorToCheck >= 190 && colorToCheck < 255){
                     return true;
                 } else {
                     return false;
                 }
             case "violet":
-                goalColorDisplay.style.backgroundColor = "hsl(295,100%,50%)";
-                if(colorToCheck >= 260 && colorToCheck < 315){
+                goalColorDisplay.style.backgroundColor = "hsl(285,100%,50%)";
+                if(colorToCheck >= 255 && colorToCheck < 315){
                     return true;
                 } else {
                     return false;
@@ -157,6 +157,7 @@ function printGrid(gridSize, goalScore){
         gridRow.classList.add("grid-row");
         container.appendChild(gridRow);
     }
+    checkColor(1,goalColor);
 
 }
 
