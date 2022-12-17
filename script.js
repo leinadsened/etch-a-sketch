@@ -1,14 +1,15 @@
-printGrid(8);
-let goalColor = "red";
+let goalColor = "green";
 let goalScore = 80;
 let display = document.getElementById("display");
-let check = document.createElement("button");
-check.addEventListener("click", getColors);
-check.textContent = "check the colors";
-display.appendChild(check);
 let scoreDisplay = document.createElement("div");
 scoreDisplay.classList.add("scoreDisplay");
 display.appendChild(scoreDisplay);
+let goalColorDisplay = document.createElement("div");
+goalColorDisplay.classList.add("goalColorDisplay");
+goalColorDisplay.textContent = "This color is your goal!";
+display.appendChild(goalColorDisplay);
+
+printGrid(8);
 
 function RGBToHSL(rgb) {
     r = rgb[0];
@@ -75,6 +76,7 @@ function checkColor(colorToCheck){
     } else{
         switch(goalColor) {
             case "red":
+                goalColorDisplay.style.backgroundColor = "hsl(0,100%,50%)";
                 if (colorToCheck <= 15 || colorToCheck > 315){
                     return true;
                 } else{
@@ -93,6 +95,7 @@ function checkColor(colorToCheck){
                     return false;
                 }
             case "green":
+                goalColorDisplay.style.backgroundColor = "hsl(120,100%,50%)";
                 if(colorToCheck >= 75 && colorToCheck < 150){
                     return true;
                 } else{
@@ -133,6 +136,7 @@ function printGrid(gridSize){
             gridCell.style.width = gridWidth;
             gridCell.addEventListener("mouseover", () => {let randomColor = Math.floor(Math.random()*360);
             gridCell.style.background = "hsl(randomColor, 100%, 50%)".replace(/randomColor/, randomColor);});
+            gridCell.addEventListener("mouseout", getColors);
             gridRow.appendChild(gridCell);
         }
         gridRow.classList.add("grid-row");
