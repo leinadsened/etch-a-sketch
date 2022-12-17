@@ -1,14 +1,15 @@
 let goalColors = ["green","red","orange","yellow","turquoise","blue","violet"];
-
+let didWeWin = false;
+let currentLevel = 1;
 let display = document.getElementById("display");
 let scoreDisplay = document.createElement("div");
 scoreDisplay.classList.add("scoreDisplay");
 display.appendChild(scoreDisplay);
 let goalColorDisplay = document.createElement("div");
 goalColorDisplay.classList.add("goalColorDisplay");
-goalColorDisplay.textContent = "This color is your goal!";
+goalColorDisplay.textContent = "Level " + currentLevel + ". complete " + currentLevel*15 +"% to pass";
 display.appendChild(goalColorDisplay);
-printGrid(8,20);
+printGrid(8,15);
 
 
 
@@ -66,10 +67,9 @@ function checkColors(goalScore, goalColor){
     let scorePercentage = (cellCount / cells.length)*100;
     if (scorePercentage < goalScore){
         scoreDisplay.textContent = "You are " + scorePercentage + "% done, keep going!";
-        return true;
-    } else {
         return false;
-        scoreDisplay.textContent = "Congratulations, you have compelted this level!";
+    } else {
+        return true;
     }
 }
 
@@ -145,11 +145,18 @@ function printGrid(gridSize, goalScore){
             gridCell.style.width = gridWidth;
             gridCell.addEventListener("mouseover", () => {let randomColor = Math.floor(Math.random()*360);
             gridCell.style.background = "hsl(randomColor, 100%, 50%)".replace(/randomColor/, randomColor);});
-            gridCell.addEventListener("mouseout", () => {checkColors(goalScore, goalColor)});
+            gridCell.addEventListener("mouseout", () => {if(checkColors(goalScore, goalColor)){
+                alert("You Won! Please proceed to the next level.");
+                currentLevel++;
+                container.innerHTML = "";
+                printGrid(8,currentLevel*15);
+                goalColorDisplay.textContent = "Level " + currentLevel + ". complete " + currentLevel*15 +"% to pass";
+            }});
             gridRow.appendChild(gridCell);
         }
         gridRow.classList.add("grid-row");
         container.appendChild(gridRow);
     }
+
 }
 
