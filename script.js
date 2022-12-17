@@ -7,9 +7,9 @@ scoreDisplay.classList.add("scoreDisplay");
 display.appendChild(scoreDisplay);
 let goalColorDisplay = document.createElement("div");
 goalColorDisplay.classList.add("goalColorDisplay");
-goalColorDisplay.textContent = "Level " + currentLevel + ". complete " + currentLevel*15 +"% to pass";
+goalColorDisplay.textContent = "Level " + currentLevel + ". complete " + currentLevel*5 +"% to pass";
 display.appendChild(goalColorDisplay);
-printGrid(8,15);
+printGrid(8,5);
 
 
 
@@ -149,7 +149,7 @@ function printGrid(gridSize, goalScore){
                 alert("You Won! Please proceed to the next level.");
                 currentLevel++;
                 container.innerHTML = "";
-                printGrid(8,currentLevel*15);
+                printGrid(8,currentLevel*5);
                 goalColorDisplay.textContent = "Level " + currentLevel + ". complete " + currentLevel*15 +"% to pass";
             }});
             gridRow.appendChild(gridCell);
