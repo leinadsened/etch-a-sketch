@@ -146,7 +146,7 @@ function printGrid(gridSize, goalScore){
                 alert("You Won! Please proceed to the next round.");
                 currentLevel++;
                 container.innerHTML = "";
-                printGrid(4+currentLevel,currentLevel*5);
+                printGrid(Math.floor((8+currentLevel)/2),currentLevel*5);
                 goalColorDisplay.textContent = "Round " + currentLevel + ". complete " + currentLevel*5 +"% to pass";
             }});
             gridRow.appendChild(gridCell);
