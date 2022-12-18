@@ -5,7 +5,7 @@ let display = document.getElementById("display");
 let scoreDisplay = document.getElementById("scoreDisplay");
 let goalColorDisplay = document.getElementById("goalColorDisplay");
 goalColorDisplay.textContent = "Round " + currentLevel + ". color " + currentLevel*5 +"% to pass";
-printGrid(8,5);
+printGrid(5,5);
 
 
 
@@ -146,7 +146,7 @@ function printGrid(gridSize, goalScore){
                 alert("You Won! Please proceed to the next round.");
                 currentLevel++;
                 container.innerHTML = "";
-                printGrid(8,currentLevel*5);
+                printGrid(4+currentLevel,currentLevel*5);
                 goalColorDisplay.textContent = "Round " + currentLevel + ". complete " + currentLevel*5 +"% to pass";
             }});
             gridRow.appendChild(gridCell);
