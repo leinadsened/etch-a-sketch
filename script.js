@@ -2,13 +2,9 @@ let goalColors = ["green","red","orange","yellow","turquoise","blue","violet"];
 let didWeWin = false;
 let currentLevel = 1;
 let display = document.getElementById("display");
-let scoreDisplay = document.createElement("div");
-scoreDisplay.classList.add("scoreDisplay");
-display.appendChild(scoreDisplay);
-let goalColorDisplay = document.createElement("div");
-goalColorDisplay.classList.add("goalColorDisplay");
-goalColorDisplay.textContent = "Level " + currentLevel + ". complete " + currentLevel*5 +"% to pass";
-display.appendChild(goalColorDisplay);
+let scoreDisplay = document.getElementById("scoreDisplay");
+let goalColorDisplay = document.getElementById("goalColorDisplay");
+goalColorDisplay.textContent = "Round " + currentLevel + ". color " + currentLevel*5 +"% to pass";
 printGrid(8,5);
 
 
@@ -66,7 +62,7 @@ function checkColors(goalScore, goalColor){
         }
     let scorePercentage = (cellCount / cells.length)*100;
     if (scorePercentage < goalScore){
-        scoreDisplay.textContent = "You are " + scorePercentage + "% done, keep going!";
+        scoreDisplay.textContent = " " + scorePercentage.toFixed(2) + "% done, keep going!";
         return false;
     } else {
         return true;
@@ -143,14 +139,15 @@ function printGrid(gridSize, goalScore){
             let gridWidth = 100/gridSize + "%";
             gridCell.classList.add("gridcell");
             gridCell.style.width = gridWidth;
+            gridCell.style.backgroundColor = "white";
             gridCell.addEventListener("mouseover", () => {let randomColor = Math.floor(Math.random()*360);
             gridCell.style.background = "hsl(randomColor, 100%, 50%)".replace(/randomColor/, randomColor);});
             gridCell.addEventListener("mouseout", () => {if(checkColors(goalScore, goalColor)){
-                alert("You Won! Please proceed to the next level.");
+                alert("You Won! Please proceed to the next round.");
                 currentLevel++;
                 container.innerHTML = "";
                 printGrid(8,currentLevel*5);
-                goalColorDisplay.textContent = "Level " + currentLevel + ". complete " + currentLevel*15 +"% to pass";
+                goalColorDisplay.textContent = "Round " + currentLevel + ". complete " + currentLevel*5 +"% to pass";
             }});
             gridRow.appendChild(gridCell);
         }
